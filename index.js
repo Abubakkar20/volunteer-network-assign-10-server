@@ -8,12 +8,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-
-const password = ' pass: volunteerNetwork80,name: volunteerNetwork '
-
-
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://volunteerNetwork:volunteerNetwork80@cluster0.jgk8y.mongodb.net/volunteerNetwork?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB__USER}:${process.env.DB__PASS}@cluster0.jgk8y.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const registerCollection = client.db("volunteerNetwork").collection("regester");
@@ -53,9 +49,4 @@ app.get('/', (req, res) => {
   res.send('Hello World, setup done!')
 })
 
-
-
-
-
-
-app.listen(port)
+app.listen(process.env.PORT || post)
