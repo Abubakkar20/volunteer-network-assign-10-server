@@ -8,6 +8,11 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+
+app.get('/', (req, res) =>{
+  res.send('work it')
+})
+
 const MongoClient = require('mongodb').MongoClient;
 const uri = `mongodb+srv://${process.env.DB__USER}:${process.env.DB__PASS}@cluster0.jgk8y.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -44,9 +49,5 @@ res.send(documents);
 
 })
 });
-
-app.get('/', (req, res) => {
-  res.send('Hello World, setup done!')
-})
 
 app.listen(process.env.PORT || post)
